@@ -1,16 +1,7 @@
 
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  image: string;
-  category: string;
-  isNew?: boolean;
-}
+import { Product } from "@/types/product";
 
 interface OrderData {
   product: Product;

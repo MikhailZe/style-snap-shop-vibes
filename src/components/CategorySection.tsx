@@ -1,15 +1,6 @@
 
 import { ProductCard } from "./ProductCard";
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  image: string;
-  category: string;
-  isNew?: boolean;
-}
+import { Product } from "@/types/product";
 
 interface CategorySectionProps {
   title: string;

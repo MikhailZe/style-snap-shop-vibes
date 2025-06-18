@@ -11,16 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useOrderSubmission } from "@/hooks/useOrderSubmission";
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  image: string;
-  category: string;
-  isNew?: boolean;
-}
+import { Product } from "@/types/product";
 
 interface OrderDialogProps {
   product: Product | null;
