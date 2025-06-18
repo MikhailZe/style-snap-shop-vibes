@@ -45,21 +45,40 @@ export const useOrderSubmission = () => {
         console.log("Данные отправлены в Telegram:", telegramData);
       }
 
-      // Отправка webhook в n8n
+      // Отправка webhook в n8n с плоской структурой данных
       if (webhookUrl) {
+        const webhookData = {
+          // Информация о продукте
+          product_id: orderData.product.id,
+          product_name: orderData.product.name,
+          product_description: orderData.product.description,
+          product_price: orderData.product.price,
+          product_category: orderData.product.category,
+          product_image: orderData.product.image,
+          product_is_new: orderData.product.isNew || false,
+          
+          // Информация о клиенте
+          customer_name: orderData.customerInfo?.name || "",
+          customer_phone: orderData.customerInfo?.phone || "",
+          customer_size: orderData.customerInfo?.size || "",
+          customer_comments: orderData.customerInfo?.comments || "",
+          
+          // Системная информация
+          source: "telegram_mini_app",
+          timestamp: new Date().toISOString(),
+          order_date: new Date().toLocaleDateString('ru-RU'),
+          order_time: new Date().toLocaleTimeString('ru-RU'),
+        };
+
         await fetch(webhookUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           mode: "no-cors",
-          body: JSON.stringify({
-            order: orderData,
-            source: "telegram_mini_app",
-            timestamp: new Date().toISOString(),
-          }),
+          body: JSON.stringify(webhookData),
         });
-        console.log("Webhook отправлен в n8n");
+        console.log("Webhook отправлен в n8n с структурированными данными:", webhookData);
       }
 
       toast({
