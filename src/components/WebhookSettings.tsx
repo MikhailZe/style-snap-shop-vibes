@@ -30,7 +30,7 @@ export const WebhookSettings = ({ webhookUrl, onWebhookChange }: WebhookSettings
               id="webhook"
               value={tempUrl}
               onChange={(e) => setTempUrl(e.target.value)}
-              placeholder="https://your-n8n-instance.com/webhook/..."
+              placeholder="https://n8n.zemiai.ru/webhook/Poalina"
               className="border-soft-pink-200 focus:border-soft-pink-400"
             />
             <Button
