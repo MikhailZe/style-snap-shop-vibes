@@ -4,7 +4,6 @@ import { CategorySection } from "@/components/CategorySection";
 import { OrderDialog } from "@/components/OrderDialog";
 import { OrderInstructions } from "@/components/OrderInstructions";
 import { NavigationTabs } from "@/components/NavigationTabs";
-import { WebhookSettings } from "@/components/WebhookSettings";
 import { AppHeader } from "@/components/AppHeader";
 import { Product } from "@/types/product";
 import { products, categories } from "@/data/products";
@@ -12,10 +11,9 @@ import { products, categories } from "@/data/products";
 const Index = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isOrderDialogOpen, setIsOrderDialogOpen] = useState(false);
-  const [webhookUrl, setWebhookUrl] = useState("");
-
-  // Проверяем, находимся ли мы в режиме разработки
-  const isDevelopment = import.meta.env.DEV;
+  
+  // Фиксированный webhook URL
+  const webhookUrl = "https://n8n.zemiai.ru/webhook/Poalina";
 
   const handleOrder = (product: Product) => {
     setSelectedProduct(product);
@@ -26,14 +24,6 @@ const Index = () => {
     <div className="min-h-screen gradient-bg">
       <div className="container mx-auto px-4 py-8">
         <AppHeader />
-
-        {/* Настройки webhook - только для режима разработки */}
-        {isDevelopment && (
-          <WebhookSettings 
-            webhookUrl={webhookUrl}
-            onWebhookChange={setWebhookUrl}
-          />
-        )}
 
         {/* Навигация */}
         <NavigationTabs
