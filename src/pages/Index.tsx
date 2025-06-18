@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { CategorySection } from "@/components/CategorySection";
 import { OrderDialog } from "@/components/OrderDialog";
@@ -20,6 +19,9 @@ const Index = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isOrderDialogOpen, setIsOrderDialogOpen] = useState(false);
   const [webhookUrl, setWebhookUrl] = useState("");
+
+  // Проверяем, находимся ли мы в режиме разработки
+  const isDevelopment = import.meta.env.DEV;
 
   const products: Product[] = [
     // Мужские костюмы
@@ -161,11 +163,13 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Настройки webhook - только для разработки */}
-        <WebhookSettings 
-          webhookUrl={webhookUrl}
-          onWebhookChange={setWebhookUrl}
-        />
+        {/* Настройки webhook - только для режима разработки */}
+        {isDevelopment && (
+          <WebhookSettings 
+            webhookUrl={webhookUrl}
+            onWebhookChange={setWebhookUrl}
+          />
+        )}
 
         {/* Навигация */}
         <NavigationTabs
